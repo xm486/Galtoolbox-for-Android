@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<title>Gal工具箱</title>
+	<!-- 引入CSS文件 -->
+	<link rel="stylesheet" href="css/index.css">
+	<link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+ 	<!--雪花特效-->
+	<div id="snow-container"></div>
+	<!-- 顶部导航栏 -->
+	<div class="top-nav" style="overflow: hidden;"><img src="favicon.ico" alt="图片描述" style="width: 20%;">Gal工具箱</div>
+	<!-- 顶部按钮-->
+<div class="top-search">
+	<form action="https://sg.saop.cc/"; gap: 0.5rem; ">
+		<b><p align="center">Galgame聚合搜索</p></b>
+		<button type="submit" class="btn" style="padding: 0.5rem 1rem;">点击进入</button>
+	</form>
+</div>
+	<!-- 封面放大遮罩层 -->
+	<div class="cover-modal" id="coverModal">
+		<button class="close-modal" onclick="closeModal()">×</button>
+		<img src="" alt="放大的游戏封面" class="modal-content" id="modalImage">
+	</div>
+
+	<!-- 主内容容器 -->
+	<div class="container">
+		<!-- vndb查询板块 -->
+		<div class="section">
+			<div class="section-title">vndb游戏查询</div>
+			<div class="vndb-tool">
+				<!-- 输入区域 -->
+				<div class="input-area">
+					<input type="text" id="gameInput" placeholder="输入游戏名称，查询vndb数据库...">
+					<button class="btn"	<button class="btn" onclick="searchGame()">查询</button>
+					<button class="btn reset-btn" onclick="resetAll()">重置</button>
+				</div>
+
+				<!-- 查询结果区域 -->
+				<div class="result-area" id="searchResultArea">
+					输入游戏名称，点击查询获取vndb数据库结果～
+				</div>
+
+				<!-- 详情展示区域 -->
+				<div class="detail-area" id="detailArea">
+					<div class="detail-header">
+						<!-- 封面加载状态 -->
+						<div class="loading-wrapper" id="coverLoading">
+							<span class="spin-loading"></span>
+							<span>加载封面中...</span>
+						</div>
+						<img src="" alt="游戏封面" class="game-cover" id="gameCover" style="display: none;" onclick="openModal(this.src)">
+						<div class="detail-title" id="detailTitle"></div>
+						<div class="detail-original" id="detailOriginal"></div>
+					</div>
+					<div class="detail-grid">
+						<div class="detail-item">
+							<div class="detail-label">游玩时长</div>
+							<div class="detail-value" id="detailLength">
+								<div class="loading-wrapper">
+									<span class="spin-loading"></span>
+								</div>
+							</div>
+						</div>
+						<div class="detail-item">
+							<div class="detail-label">发售日期</div>
+							<div class="detail-value" id="detailReleased">
+								<div class="loading-wrapper">
+									<span class="spin-loading"></span>
+								</div>
+							</div>
+						</div>
+						<div class="detail-item">
+							<div class="detail-label">支持语言</div>
+							<div class="detail-value" id="detailLanguages">
+								<div class="loading-wrapper">
+									<span class="spin-loading"></span>
+								</div>
+							</div>
+						</div>
+						<div class="detail-item">
+							<div class="detail-label">支持平台</div>
+							<div class="detail-value" id="detailPlatforms">
+								<div class="loading-wrapper">
+									<span class="spin-loading"></span>
+								</div>
+							</div>
+						</div>
+						<div class="detail-item">
+							<div class="detail-label">开发商</div>
+							<div class="detail-value" id="detailDevelopers">
+								<div class="loading-wrapper">
+									<span class="spin-loading"></span>
+								</div>
+							</div>
+						</div>
+						<div class="detail-item">
+							<div class="detail-label">游戏ID</div>
+							<div class="detail-value" id="detailId">
+								<div class="loading-wrapper">
+									<span class="spin-loading"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- 游戏简介 -->
+					<div class="detail-item">
+						<div class="detail-label">游戏简介</div>
+						<div class="detail-value" id="descriptionContainer" style="min-height: auto; line-height: 1.5;">
+							<div class="loading-wrapper" style="justify-content: flex-start; padding: 0.5rem 0;">
+								<span class="spin-loading"></span>
+								<span>加载简介中...</span>
+							</div>
+							<div id="detailDescription" style="display: none;"></div>
+						</div>
+					</div>
+					<div class="search-time" id="detailSearchTime"></div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 链接分享板块 -->
+		<div class="section">
+			<div class="section-title">实用gal链接</div>
+			<div class="links-grid">
+				<div class="link-card">
+					<div class="link-icon" style="overflow: hidden;border: 1px solid #6699ff;"><img src="image/zy1.jpg" alt="图片描述" style="width: 100%;"></div>
+					<div class="link-title">gal资源站</div>
+					<div class="link-desc">提供galgame游戏资源、补丁的综合站点</div>
+					<a href="gal_zy.html" target="_blank" class="link-btn">访问站点</a>
+				</div>
+				<div class="link-card">
+					<div class="link-icon" style="overflow: hidden;border: 1px solid #6699ff;"><img src="image/zy2.jpg" alt="图片描述" style="width: 100%;"></div>
+					<div class="link-title">gal资料/攻略/论坛库</div>
+					<div class="link-desc">收录海量galgame的资料、论坛、全流程攻略、CG收集指南</div>
+					<a href="gal_zl.html" target="_blank" class="link-btn">访问站点</a>
+				</div>
+				<div class="link-card">
+					<div class="link-icon" style="overflow: hidden;border: 1px solid #6699ff;"><img src="image/zy3.jpg" alt="图片描述" style="width: 100%;"></div>
+					<div class="link-title">Gal正版渠道</div>
+					<div class="link-desc">Galgame正版入正渠道</div>
+					<a href="gal_zb.html" target="_blank" class="link-btn">访问站点</a>
+				</div>
+				<div class="link-card">
+					<div class="link-icon" style="overflow: hidden;border: 1px solid #6699ff;"><img src="image/zy4.jpg" alt="图片描述" style="width: 100%;"></div>
+					<div class="link-title">实用工具站</div>
+					<div class="link-desc">一些gal实用小工具(雾)</div>
+					<a href="gal_tools.html" target="_blank" class="link-btn">访问站点</a>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 链接分享板块 -->
+		<div class="section">
+			<div class="section-title">一些Gal教学</div>
+			<div class="links-grid">
+				<div class="link-card">
+					<div class="link-icon" style="overflow: hidden;"><img src="https://ecmb.bdimg.com/tam-ogel/628247478_446721719_192_192.png" alt="图片描述" style="width: 100%;"></div>
+					<div class="link-title">【Gal萌新小白入门课】从零开始的Galgame 之旅</div>
+					<div class="link-desc"><span style="color: pink; font-weight: bold;font-size:15px;text-shadow: 1px 1px 0 black,-1px -1px 0 black,1px -1px 0 black,-1px 1px 0 black;   ">-适用于PC/安卓-</span><br>站长做的一个萌新向入门指南，欢迎观看喵</div>
+					<a href="https://b23.tv/wuJZxkc" target="_blank" class="link-btn">访问站点</a>
+				</div>
+				<div class="link-card">
+					<div class="link-icon" style="overflow: hidden;"><img src="https://ecmb.bdimg.com/tam-ogel/628247478_446721719_192_192.png" alt="图片描述" style="width: 100%;"></div>
+					<div class="link-title">【盖世游戏模拟器教程(专注于Gal版)/在手机上畅玩Galgame】</div>
+					<div class="link-desc"><span style="color: pink; font-weight: bold;font-size:15px;text-shadow: 1px 1px 0 black,-1px -1px 0 black,1px -1px 0 black,-1px 1px 0 black;   ">-适用于安卓-</span><br>能用手机游玩非kr，ar引擎的PC Gal的模拟器教程</div>
+					<a href="https://b23.tv/L55kOOq" target="_blank" class="link-btn">访问站点</a>
+				</div>
+				<div class="link-card">
+					<div class="link-icon" style="overflow: hidden;"><img src="https://ecmb.bdimg.com/tam-ogel/628247478_446721719_192_192.png" alt="图片描述" style="width: 100%;"></div>
+					<div class="link-title">【萌萌萌新向】连时间大人都能学会的解压教学</div>
+					<div class="link-desc"><span style="color: pink; font-weight: bold;font-size:15px;text-shadow: 1px 1px 0 black,-1px -1px 0 black,1px -1px 0 black,-1px 1px 0 black;   ">-适用于任何设备-</span><br>站内一个很好的解压教学视频，不会解压的推荐学习</div>
+					<a href="https://b23.tv/WwNsqmM" target="_blank" class="link-btn">访问站点</a>
+				</div>
+				<div class="link-card">
+					<div class="link-icon" style="overflow: hidden;"><img src="https://ecmb.bdimg.com/tam-ogel/628247478_446721719_192_192.png" alt="图片描述" style="width: 100%;"></div>
+					<div class="link-title">【Gal小课堂】07分21秒教会你如何购买Galgame</div>
+					<div class="link-desc"><span style="color: pink; font-weight: bold;font-size:15px;text-shadow: 1px 1px 0 black,-1px -1px 0 black,1px -1px 0 black,-1px 1px 0 black;   ">-适用于任何设备-</span><br>还在为不会买日本正版旮旯而发愁吗？
+让Tama和Mako7分21秒教会你！</div>
+					<a href="https://b23.tv/wyvA2b4" target="_blank" class="link-btn">访问站点</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 底部说明 -->
+	<div class="footer">
+		galgame工具箱 © 2025 | 数据来源于vndb数据库
+	</div>
+	 
+<!-- 伸缩式文字播放器 -->
+<div class="player-container" id="playerContainer">
+  <div class="player-icon" id="playerIcon">🎵▶️</div>
+  <!-- 展开后显示的文字 -->
+  <div class="player-text" id="playerText">▶️正在播放音乐:二人のクロニクル</div>
+  <audio id="floatPlayer" preload="none" loop>
+	<source src="music/m1.mp3" type="audio/mpeg">
+	您的浏览器不支持音频播放
+  
+</div>
+
+	<!-- 引入JS文件 -->
+	<script src="js/index.js"></script>
+</body>
+</html>
